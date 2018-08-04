@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  elastic:
+    image: elasticsearch:latest
+    ports:
+      - '8888:9200'
+
+  crawler:
+    image: crawler
+    ports:
+      - '8000:5000'
+    environment:
+      - SCRAPE_LIMIT=2
+    volumes:
+      - ./app/:/etc/app/
