@@ -1,3 +1,4 @@
+elasticsearch
 mock
 requests
 beautifulsoup4

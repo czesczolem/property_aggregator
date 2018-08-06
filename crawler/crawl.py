@@ -10,7 +10,7 @@ from otodom.offer import get_offer_information
 
 log = logging.getLogger(__file__)
 
-es = elasticsearch.Elasticsearch([{'host': 'localhost', 'port': 9200}])
+es = elasticsearch.Elasticsearch([{'host': '172.18.0.1', 'port': 8888}])
 
 SCRAPE_LIMIT = os.environ.get('SCRAPE_LIMIT', None)
 
@@ -31,7 +31,7 @@ if __name__ == '__main__':
     for id, offer in enumerate(parsed_category):
         log.info("Scarping offer - {0}".format(offer['detail_url']))
         offer_detail = get_offer_information(offer['detail_url'], context=offer)
-        print("id: " + id)
+        print("id: ", id)
         offer_detail_enc = {k: unicode(v).encode("utf-8") for k,v in offer_detail.iteritems()}
         es.index(index='otodom', doc_type='offers', id=id, body=offer_detail_enc)
         log.info("Scraped offer - {0}".format(offer_detail))
