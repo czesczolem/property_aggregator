@@ -14,8 +14,7 @@ app = Flask(__name__)
 
 log = logging.getLogger(__file__)
 
-# es = elasticsearch.Elasticsearch([{'host': '172.18.0.1', 'port': 8888}])
-es = elasticsearch.Elasticsearch([{'host': '0.0.0.0', 'port': 8888}])
+es = elasticsearch.Elasticsearch([{'host': '172.18.0.1', 'port': 8888}])
 
 SCRAPE_LIMIT = os.environ.get('SCRAPE_LIMIT', None)
 
