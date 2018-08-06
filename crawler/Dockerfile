@@ -5,4 +5,4 @@ COPY . /app
 WORKDIR /app
 RUN pip install -r requirements.txt
 EXPOSE 5000
-CMD ["python", "crawl.py"]
+CMD ["python", "scraper_api.py"]

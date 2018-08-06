@@ -12,5 +12,6 @@ services:
       - '8000:5000'
     environment:
       - SCRAPE_LIMIT=2
+      - DEBUG=1
     volumes:
       - ./app/:/etc/app/
