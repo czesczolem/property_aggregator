@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 from flask import Flask
 from flask import request
+from flask import jsonify
 import os
 import logging
 import elasticsearch
@@ -13,9 +14,15 @@ app = Flask(__name__)
 
 log = logging.getLogger(__file__)
 
-es = elasticsearch.Elasticsearch([{'host': '172.18.0.1', 'port': 8888}])
+# es = elasticsearch.Elasticsearch([{'host': '172.18.0.1', 'port': 8888}])
+es = elasticsearch.Elasticsearch([{'host': '0.0.0.0', 'port': 8888}])
 
 SCRAPE_LIMIT = os.environ.get('SCRAPE_LIMIT', None)
+
+
+@app.route('/')
+def index():
+    return "Scraper API"
 
 
 @app.route('/scrap')
@@ -48,6 +55,10 @@ def start_scraping():
 
     return info
 
+@app.route('/db/<id>')
+def show_database(id):
+    data = es.get(index='otodom', doc_type='offers', id=id)
+    return jsonify(data)
 
 if __name__ == '__main__':
     app.run(debug=True,host='0.0.0.0', port=5000)
